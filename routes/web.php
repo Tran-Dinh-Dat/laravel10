@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\TodoList;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,6 @@ Route::get('update/{file}', [FileController::class, 'edit'])->name('edit');
 Route::get('loading', function () {
     return view('loading.index');
 });
+
+ 
+Route::get('/todos', TodoList::class);
