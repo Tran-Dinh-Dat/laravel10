@@ -1,8 +1,12 @@
 <?php
 
 use App\Http\Controllers\FileController;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\TodoList;
+use Illuminate\Support\Facades\Response;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,12 +38,6 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/storage/move', function () {
-    // foreach (Storage::files('tmp') as $_file) {
-    //     if (is_file(Storage::path($_file))) {
-    //         dump($_file);
-    //     }
-    // }
-
     dump(storage_path('tmp'));
     dump(Storage::path('tmp/image.jpg'));
 
@@ -65,7 +63,29 @@ Route::post('storage/create', function (Request $request) {
     $file = $request->file('image');
     $fileName = $file->getClientOriginalName();
     $hashedFileName = Hash::make($fileName) . '_' . Carbon::now()->format('YmdHis') . '.' . $file->getClientOriginalExtension();
-    dump($hashedFileName);
+    // dump($hashedFileName);
     // dd($file);
     Storage::putFileAs('tmp', $request->file('image'), $hashedFileName);
+
+    return response()->json([
+        'status' => 'upload success',
+        'data' => Storage::allFiles(),
+    ]);
+});
+Route::get('storage/allfile', function () {
+    return response()->json([
+        'data' => Storage::allFiles(),
+    ]);
+});
+Route::get('get-image', function (Request $request) {
+    $query = $request->input('file') ?? '';
+    $file = Storage::get($query);
+    $type = Storage::mimeType($query);
+    $response = Response::make($file, 200)->header("Content-Type", $type);
+
+    return $response;
+})->name('get-image');
+
+Route::get('page-test', function () {
+    return view('home');
 });

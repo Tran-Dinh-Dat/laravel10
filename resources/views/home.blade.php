@@ -7,7 +7,11 @@
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+
+<div>
+    <img src="{{ get_image('tmp/nCOVOJmLqW.jpg') }}" alt="">
+</div>
+
 @stop
 
 @section('css')
