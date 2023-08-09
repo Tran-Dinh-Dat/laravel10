@@ -8,8 +8,10 @@
 
 @section('content')
 
-<div>
-    <img src="{{ get_image('tmp/nCOVOJmLqW.jpg') }}" alt="">
+<div style="display:">
+    <img width="300" src="{{ get_image('tmp/nCOVOJmLqW.jpg') }}" alt="">
+    <img width="300" src="{{ get_image_facade('tmp/IcYYSyynHh.jpg') }}" alt="">
+    <img width="300" src="{{ StorageViewerFacade::getImage('tmp/F3lZTAwBcw.webp') }}" alt="">
 </div>
 
 @stop
