@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\FullCalenderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\TodoList;
 
@@ -29,3 +30,8 @@ Route::get('loading', function () {
 
  
 Route::get('/todos', TodoList::class);
+
+Route::controller(FullCalenderController::class)->group(function(){
+    Route::get('fullcalender', 'index');
+    Route::post('fullcalenderAjax', 'ajax');
+});
