@@ -14,6 +14,9 @@
     <img width="300" src="{{ StorageViewerFacade::getImage('tmp/F3lZTAwBcw.webp') }}" alt="">
 </div>
 
+<div>
+    @dd($menuItem)
+</div>
 @stop
 
 @section('css')
