@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('upload', [FileController::class, 'index'])->name('index');
-Route::post('upload', [FileController::class, 'store'])->name('upload');
-Route::patch('update/{file}', [FileController::class, 'update'])->name('update');
-Route::get('update/{file}', [FileController::class, 'edit'])->name('edit');
+Route::get('/', function () {
+    return Inertia::render('Public/Home', [
+        'laravel' => \Illuminate\Foundation\Application::VERSION,
+        'php' => PHP_VERSION,
+    ]);
+});
