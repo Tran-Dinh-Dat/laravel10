@@ -24,3 +24,10 @@ Route::get('/', function () {
         'php' => PHP_VERSION,
     ]);
 });
+
+
+Route::get('laravel-service-container', function () {
+    $myClass = app()->make('myclass');
+
+    $myClass->run();
+});
